@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { XmrapiService } from '../xmrapi.service'
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
+
 export class SignupComponent {
+    constructor(private fb: FormBuilder,
+      private xmrapi: XmrapiService,) {}
+   
   url: any; //Angular 11, for stricter type
   msg = "";
 
@@ -126,9 +131,7 @@ export class SignupComponent {
     {name: 'Wyoming', abbreviation: 'WY'}
   ];
 
-  constructor(private fb: FormBuilder) {}
 
   onSubmit(): void {
-    alert('Thanks!');
-  }
+ this.xmrapi.addStudent("SDSDS", "SDSDD");  }
 }

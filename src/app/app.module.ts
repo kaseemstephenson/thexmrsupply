@@ -21,6 +21,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { SignupComponent } from './signup/signup.component';
+import { environment } from '../environments/environment';
+
+
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { SignupComponent } from './signup/signup.component';
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    
+
   ],
   providers: [],
   bootstrap: [AppComponent]
