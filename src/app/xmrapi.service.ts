@@ -13,36 +13,44 @@ import { environment } from '../environments/environment';
 export class XmrapiService {
 
 db: Firestore;
-  studentCol: CollectionReference<DocumentData>;
+  ApplicantsDoc: CollectionReference<DocumentData>;
   private updatedSnapshot = new Subject<QuerySnapshot<DocumentData>>();
   obsr_UpdatedSnapshot = this.updatedSnapshot.asObservable();
 
   constructor() {
     initializeApp(environment.firebase);
     this.db = getFirestore();
-    this.studentCol = collection(this.db, 'students');
+    this.ApplicantsDoc = collection(this.db, 'Applicants');
 
     // Get Realtime Data
-    onSnapshot(this.studentCol, (snapshot) => {
+    onSnapshot(this.ApplicantsDoc, (snapshot) => {
       this.updatedSnapshot.next(snapshot);
     }, (err) => {
       console.log(err);
     })
   }
 
+
   async getStudents() {
-    const snapshot = await getDocs(this.studentCol);
+    const snapshot = await getDocs(this.ApplicantsDoc);
     return snapshot;
   }
 
 
   async addStudent(name: string, age: string) {
-    await addDoc(this.studentCol, {
+    await addDoc(this.ApplicantsDoc, {
       name,
       age
     })
     return;
   }
+async addApplicant(firstName: string, lastName: string, email:string, confirmEmail: string,
+ userName:string, password: string, confirmPassword:string, address: string, city: string,
+  postalCode: string,dl: string, ssn: string, dlFrontScan: any,dlBackScan: any,
+  ssnFrontSCan:any,proofOfAddress:any){
+
+}
+
 
   async deleteStudent(docId: string) {
     const docRef = doc(this.db, 'students', docId)

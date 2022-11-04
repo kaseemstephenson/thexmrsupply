@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="First name" formControlName="firstName">
+            <input matInput placeholder="First name" formControlName="firstName" [(ngModel)]="firstName">
             <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
               First name is <strong>required</strong>
             </mat-error>
@@ -26,6 +26,51 @@
           </mat-form-field>
         </div>
       </div>
+      <div class="col">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="EMAIL" formControlName="lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+      <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="CONFIRM EMAIL" formControlName="lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+          <mat-form-field class="full-width">
+            <input matInput placeholder="USERNAME" formControlName="lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+      <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="PASSWORD" formControlName="lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+      <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="CONFIRM PASSWORD" formControlName="lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+    
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">

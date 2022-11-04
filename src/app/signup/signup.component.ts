@@ -14,6 +14,22 @@ export class SignupComponent {
    
   url: any; //Angular 11, for stricter type
   msg = "";
+  firstName:string = "";
+  lastName: string = "";
+   email:string = "";
+   confirmEmail: string = "";
+ userName:string = "";
+ password: string = "";
+ confirmPassword:string = "";
+ address: string = "";
+ city: string = "";
+  postalCode: string = "";
+  dl: string = "";
+  ssn: string = "";
+  dlFrontScan: any = "";
+  dlBackScan: any = "";
+  ssnFrontSCan:any = "";
+  proofOfAddress:any = "";
 
   addressForm = this.fb.group({
     company: null,
@@ -133,5 +149,7 @@ export class SignupComponent {
 
 
   onSubmit(): void {
- this.xmrapi.addStudent("SDSDS", "SDSDD");  }
+    console.log(this.firstName)
+ //this.xmrapi.addStudent("SDSDS", "SDSDD");  }
+}
 }
