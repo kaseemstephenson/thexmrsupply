@@ -22,13 +22,14 @@ export class SignupComponent {
  password: string = "";
  confirmPassword:string = "";
  address: string = "";
+ state: string = "";
  city: string = "";
   postalCode: string = "";
   dl: string = "";
   ssn: string = "";
   dlFrontScan: any = "";
   dlBackScan: any = "";
-  ssnFrontSCan:any = "";
+  ssnFrontScan:any = "";
   proofOfAddress:any = "";
 
   addressForm = this.fb.group({
@@ -39,14 +40,43 @@ export class SignupComponent {
     address2: null,
     city: [null, Validators.required],
     state: [null, Validators.required],
-    postalCode: [null, Validators.compose([
-      Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-    ],
+    postalCode: [null, Validators.required],
     shipping: ['free', Validators.required]
   });
 
   hasUnitNumber = false;
-  onFileSelected() {
+  uploadTest(event:any){
+    this.xmrapi.addPic(event.target.files[0]);
+
+  }
+  saveDlFrontScan(e:any){
+    this.dlFrontScan = e.target.files[0]
+  }
+  saveDlBackScan(e:any){
+    this.dlBackScan = e.target.files[0]
+  }
+  saveSSNFrontScan(e:any){
+    this.ssnFrontScan = e.target.files[0]
+  }
+  saveProofOfAddress(e:any){
+    this.proofOfAddress = e.target.files[0]
+  }
+  
+
+  
+
+  onSubmit(): void {
+    console.log(this.firstName)
+ //this.xmrapi.addStudent("SDSDS", "SDSDD");  }
+}
+
+
+
+
+
+
+
+onFileSelected() {
   const inputNode: any = document.querySelector('#file');
 
   if (typeof (FileReader) !== 'undefined') {
@@ -84,7 +114,6 @@ export class SignupComponent {
       this.url = reader.result; 
     }
   }
-
   states = [
     {name: 'Alabama', abbreviation: 'AL'},
     {name: 'Alaska', abbreviation: 'AK'},
@@ -148,8 +177,4 @@ export class SignupComponent {
   ];
 
 
-  onSubmit(): void {
-    console.log(this.firstName)
- //this.xmrapi.addStudent("SDSDS", "SDSDD");  }
-}
 }

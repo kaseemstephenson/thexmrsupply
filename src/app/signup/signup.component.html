@@ -19,7 +19,7 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Last name" formControlName="lastName">
+            <input matInput placeholder="Last name" formControlName="lastName" [(ngModel)] = "lastName">
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
@@ -29,7 +29,7 @@
       <div class="col">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="EMAIL" formControlName="lastName">
+            <input matInput placeholder="EMAIL" formControlName="lastName" [(ngModel)] = "email">
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
@@ -38,7 +38,7 @@
       
       <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="CONFIRM EMAIL" formControlName="lastName">
+            <input matInput placeholder="CONFIRM EMAIL" formControlName="lastName" [(ngModel)] = "confirmEmail">
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
@@ -46,16 +46,7 @@
         </div>
       
           <mat-form-field class="full-width">
-            <input matInput placeholder="USERNAME" formControlName="lastName">
-            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
-              Last name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
-      
-      <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="PASSWORD" formControlName="lastName">
+            <input matInput placeholder="USERNAME" formControlName="lastName" [(ngModel)] = "userName">
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
@@ -64,7 +55,16 @@
       
       <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="CONFIRM PASSWORD" formControlName="lastName">
+            <input matInput placeholder="PASSWORD" formControlName="lastName" [(ngModel)] = "password">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+      <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="CONFIRM PASSWORD" formControlName="lastName" [(ngModel)] = "confirmPassword">
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
@@ -74,7 +74,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <textarea matInput placeholder="Address" formControlName="address"></textarea>
+            <textarea matInput placeholder="Address" formControlName="address" [(ngModel)] = "address"></textarea>
             <mat-error *ngIf="addressForm.controls['address'].hasError('required')">
               Address is <strong>required</strong>
             </mat-error>
@@ -98,7 +98,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="City" formControlName="city">
+            <input matInput placeholder="City" formControlName="city" [(ngModel)] = "city">
             <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
               City is <strong>required</strong>
             </mat-error>
@@ -106,7 +106,7 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <mat-select placeholder="State" formControlName="state">
+            <mat-select placeholder="State" formControlName="state" [(ngModel)] = "state">
               <mat-option *ngFor="let state of states" [value]="state.abbreviation">
                 {{ state.name }}
               </mat-option>
@@ -120,14 +120,14 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput #postalCode maxlength="5" placeholder="Postal Code" type="number" formControlName="postalCode">
-            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+            <input matInput  placeholder="Postal Code" type="number" formControlName="lastName" [(ngModel)] = "postalCode">
+            <mat-hint align="end"></mat-hint>
           </mat-form-field>
         </div>
       </div>
       <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="DL#" formControlName="lastName">
+            <input matInput placeholder="DL#" formControlName="lastName" [(ngModel)] = "dl">
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
@@ -135,7 +135,7 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="SSN#" formControlName="lastName">
+            <input matInput placeholder="SSN#" formControlName="lastName" [(ngModel)] = "ssn">
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
@@ -149,17 +149,17 @@
             </mat-error>
           </mat-form-field>
           <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="selectFile($event)" #fileInput type="file" id="file">
+<input hidden (change)="saveDlFrontScan($event)" #fileInput type="file" id="file" >
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput  placeholder="DL BACK UPLOAD" formControlName="lastName">
+            <input matInput  placeholder="DL BACK UPLOAD" formControlName="lastName" >
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
           </mat-form-field>
           <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="selectFile($event)" #fileInput type="file" id="file">
+<input hidden (change)="saveDlBackScan($event)" #fileInput type="file" id="filee">
         </div>
         <div class="col">
           <mat-form-field class="full-width">
@@ -169,7 +169,7 @@
             </mat-error>
           </mat-form-field>
           <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="selectFile($event)" #fileInput type="file" id="file">
+<input hidden (change)="saveSSNFrontScan($event)" #fileInput type="file" id="fileee">
         </div>
         <div class="col">
           <mat-form-field class="full-width">
@@ -179,7 +179,7 @@
             </mat-error>
           </mat-form-field>
           <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="selectFile($event)" #fileInput type="file" id="file">
+<input hidden (change)="saveProofOfAddress($event)" #fileInput type="file" id="fileeee">
         </div>
 
         

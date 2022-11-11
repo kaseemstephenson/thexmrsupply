@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { Firestore, getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, DocumentData, CollectionReference, onSnapshot, QuerySnapshot } from 'firebase/firestore'
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+
 import { Subject } from 'rxjs';
 import { environment } from '../environments/environment';
 
@@ -13,6 +15,9 @@ import { environment } from '../environments/environment';
 export class XmrapiService {
 
 db: Firestore;
+myStorage: any;
+storageRef: any;
+
   ApplicantsDoc: CollectionReference<DocumentData>;
   private updatedSnapshot = new Subject<QuerySnapshot<DocumentData>>();
   obsr_UpdatedSnapshot = this.updatedSnapshot.asObservable();
@@ -28,12 +33,20 @@ db: Firestore;
     }, (err) => {
       console.log(err);
     })
+    this.myStorage = getStorage()
   }
 
 
   async getStudents() {
     const snapshot = await getDocs(this.ApplicantsDoc);
     return snapshot;
+  }
+  async addPic(e:any){
+    this.storageRef = ref(this.myStorage, "firstUpload")
+    uploadBytes(this.storageRef, e).then((snapshot) => {
+  console.log('Uploaded a blob or file!');
+});
+
   }
 
 
@@ -45,7 +58,7 @@ db: Firestore;
     return;
   }
 async addApplicant(firstName: string, lastName: string, email:string, confirmEmail: string,
- userName:string, password: string, confirmPassword:string, address: string, city: string,
+ userName:string, password: string, confirmPassword:string, address: string,state:string, city: string,
   postalCode: string,dl: string, ssn: string, dlFrontScan: any,dlBackScan: any,
   ssnFrontSCan:any,proofOfAddress:any){
 
