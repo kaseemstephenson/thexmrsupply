@@ -67,7 +67,8 @@ export class SignupComponent {
 
   onSubmit(): void {
     console.log(this.firstName)
- //this.xmrapi.addStudent("SDSDS", "SDSDD");  }
+ this.xmrapi.addApplicant(this.firstName,this.lastName,this.email,this.confirmEmail,this.userName,this.password,
+  this.confirmPassword,this.address,this.city,this.state,this.postalCode,this.dl,this.ssn,this.dlFrontScan,this.dlBackScan,this.ssnFrontScan,this.proofOfAddress);  
 }
 
 
@@ -175,6 +176,5 @@ onFileSelected() {
     {name: 'Wisconsin', abbreviation: 'WI'},
     {name: 'Wyoming', abbreviation: 'WY'}
   ];
-
 
 }

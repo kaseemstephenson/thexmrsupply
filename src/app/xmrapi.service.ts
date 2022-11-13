@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { Firestore, getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, DocumentData, CollectionReference, onSnapshot, QuerySnapshot } from 'firebase/firestore'
+import { Firestore, setDoc, getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, DocumentData, CollectionReference, onSnapshot, QuerySnapshot } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 import { Subject } from 'rxjs';
@@ -39,7 +39,7 @@ storageRef: any;
 
   async getStudents() {
     const snapshot = await getDocs(this.ApplicantsDoc);
-    return snapshot;
+    return snapshot;  
   }
   async addPic(e:any){
     this.storageRef = ref(this.myStorage, "firstUpload")
@@ -57,10 +57,33 @@ storageRef: any;
     })
     return;
   }
+  async setStudent(name: string, age: string) {
+    await setDoc(doc(this.ApplicantsDoc, "NAME"), {
+      name,
+      age
+    })
+    return;
+  }
 async addApplicant(firstName: string, lastName: string, email:string, confirmEmail: string,
  userName:string, password: string, confirmPassword:string, address: string,state:string, city: string,
   postalCode: string,dl: string, ssn: string, dlFrontScan: any,dlBackScan: any,
   ssnFrontSCan:any,proofOfAddress:any){
+  var docName = email
+  await setDoc(doc(this.ApplicantsDoc,docName),{
+    firstName,
+    lastName,
+    email,
+    confirmEmail,
+    userName,
+    password,
+    confirmPassword,
+    address,
+    state,
+    city,
+    postalCode,
+    dl,
+    ssn
+  })
 
 }
 
