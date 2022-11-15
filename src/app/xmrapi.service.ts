@@ -48,6 +48,12 @@ storageRef: any;
 });
 
   }
+  async addDlFrontScan(e:any){
+    this.storageRef = ref(this.myStorage, "firstUpload")
+    uploadBytes(this.storageRef, e).then((snapshot) => {
+  console.log('Uploaded a blob or file!');
+});
+  }
 
 
   async addStudent(name: string, age: string) {
