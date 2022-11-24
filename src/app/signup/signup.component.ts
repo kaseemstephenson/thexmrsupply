@@ -28,9 +28,9 @@ export class SignupComponent {
   dl: string = "";
   ssn: string = "";
   dlFrontScan: any = "";
-  dlBackScan: any = "";
-  ssnFrontScan:any = "";
-  proofOfAddress:any = "";
+  dlBackScan: any = null;
+  ssnFrontScan:any = null;
+  proofOfAddress:any = null;
 
   addressForm = this.fb.group({
     company: null,
@@ -50,10 +50,17 @@ export class SignupComponent {
 
   }
   saveDlFrontScan(e:any){
+    console.log(e.target.files)
     this.dlFrontScan = e.target.files[0]
+        this.xmrapi.addDlFrontScan(e.target.files[0],this.email)
+        e = null
+        console.log(e)
+
   }
   saveDlBackScan(e:any){
+    console.log(e.target.files)
     this.dlBackScan = e.target.files[0]
+      this.xmrapi.addDlBackScan(e.target.files[0],this.email)
   }
   saveSSNFrontScan(e:any){
     this.ssnFrontScan = e.target.files[0]
@@ -67,6 +74,11 @@ export class SignupComponent {
 
   onSubmit(): void {
     console.log(this.firstName)
+    this.xmrapi.addDlFrontScan(this.dlFrontScan,this.email)
+        this.xmrapi.addDlBackScan(this.dlBackScan,this.email)
+    this.xmrapi.addSSNFrontScan(this.ssnFrontScan,this.email)
+    this.xmrapi.addProofOfAddress(this.proofOfAddress,this.email)
+
  this.xmrapi.addApplicant(this.firstName,this.lastName,this.email,this.confirmEmail,this.userName,this.password,
   this.confirmPassword,this.address,this.city,this.state,this.postalCode,this.dl,this.ssn,this.dlFrontScan,this.dlBackScan,this.ssnFrontScan,this.proofOfAddress);  
 }
@@ -78,6 +90,7 @@ export class SignupComponent {
 
 
 onFileSelected() {
+  console.log("IN FILE SLECED")
   const inputNode: any = document.querySelector('#file');
 
   if (typeof (FileReader) !== 'undefined') {
@@ -92,7 +105,8 @@ onFileSelected() {
   }
 }
 //selectFile(event) { //Angular 8
-  selectFile(event: any) { //Angular 11, for stricter type
+  selectFile(event: any) {
+  console.log("SDSIDJSIDJSID") //Angular 11, for stricter type
     if(!event.target.files[0] || event.target.files[0].length == 0) {
       this.msg = 'You must select an image';
       return;

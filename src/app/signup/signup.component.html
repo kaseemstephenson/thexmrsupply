@@ -143,23 +143,25 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput [readonly]="true" placeholder="DL FRONT UPLOAD" formControlName="lastName">
+            <input matInput [readonly]="true" placeholder="DL FRONT UPLOAD" >
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
           </mat-form-field>
+          <input hidden  (change)="saveDlFrontScan($event)" #fileInput type="file" id="file" >
+
           <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="saveDlFrontScan($event)" #fileInput type="file" id="file" >
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput  placeholder="DL BACK UPLOAD" formControlName="lastName" >
+            <input matInput  placeholder="DL BACK UPLOAD">
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
           </mat-form-field>
+          <input hidden (change)="saveDlBackScan($event)" #fileInput type="file" id="filee">
+
           <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="saveDlBackScan($event)" #fileInput type="file" id="filee">
         </div>
         <div class="col">
           <mat-form-field class="full-width">

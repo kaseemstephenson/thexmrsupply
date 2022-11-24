@@ -22,6 +22,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { SignupComponent } from './signup/signup.component';
 import { environment } from '../environments/environment';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -50,6 +51,7 @@ import { environment } from '../environments/environment';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    FormsModule,
     
 
   ],

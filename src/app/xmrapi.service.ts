@@ -48,8 +48,31 @@ storageRef: any;
 });
 
   }
-  async addDlFrontScan(e:any){
-    this.storageRef = ref(this.myStorage, "firstUpload")
+  async addDlFrontScan(e:any,id:string){
+   var  nameOfFile = id+"dlFrontScan"
+    this.storageRef = ref(this.myStorage, nameOfFile)
+    const task  = uploadBytes(this.storageRef, e).then((snapshot) => {
+  console.log('Uploaded a blob or file!');
+
+});
+  }
+  async addDlBackScan(e:any,id:string){
+   var  nameOfFile = id+"dlBackScan"
+    this.storageRef = ref(this.myStorage, nameOfFile)
+    uploadBytes(this.storageRef, e).then((snapshot) => {
+  console.log('Uploaded a blob or file!');
+});
+  }
+  async addSSNFrontScan(e:any,id:string){
+   var  nameOfFile = id+"ssnFrontSCan"
+    this.storageRef = ref(this.myStorage, nameOfFile)
+    uploadBytes(this.storageRef, e).then((snapshot) => {
+  console.log('Uploaded a blob or file!');
+});
+  }
+  async addProofOfAddress(e:any,id:string){
+   var  nameOfFile = id+"proofOfAddress"
+    this.storageRef = ref(this.myStorage, nameOfFile)
     uploadBytes(this.storageRef, e).then((snapshot) => {
   console.log('Uploaded a blob or file!');
 });
