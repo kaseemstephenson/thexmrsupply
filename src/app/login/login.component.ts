@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { XmrapiService } from '../xmrapi.service'
 
 @Component({
   selector: 'app-login',
@@ -7,6 +8,11 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+constructor(private fb: FormBuilder,
+      private xmrapi: XmrapiService,) {}
+  email:string = ""
+  password:string = ""
+  userProfile:any = ""
   addressForm = this.fb.group({
     company: null,
     firstName: [null, Validators.required],
@@ -85,9 +91,18 @@ export class LoginComponent {
     {name: 'Wyoming', abbreviation: 'WY'}
   ];
 
-  constructor(private fb: FormBuilder) {}
 
-  onSubmit(): void {
-    alert('Thanks!');
+  async onSubmit(): Promise<any>{
+    var r = await this.xmrapi.getUsers(this.email,this.password).then(res => this.userProfile = res)
+    console.log(this.userProfile)
+    if(this.userProfile == false){
+      alert("User does not exist... Sign Up!")
+    }else if(this.userProfile.password == this.password){
+      alert("Welcome " + this.userProfile.firstName)
+    }else{
+      alert("Sorry, the password you entered in incorrect")
+    }
+
+
   }
 }

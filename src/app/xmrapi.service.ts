@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { Firestore, setDoc, getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, DocumentData, CollectionReference, onSnapshot, QuerySnapshot } from 'firebase/firestore'
+import { Firestore, setDoc, getFirestore, collection, getDoc, addDoc, getDocs, deleteDoc, doc, updateDoc, DocumentData, CollectionReference, onSnapshot, QuerySnapshot } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 import { Subject } from 'rxjs';
@@ -17,6 +17,7 @@ export class XmrapiService {
 db: Firestore;
 myStorage: any;
 storageRef: any;
+ms:any;
 
   ApplicantsDoc: CollectionReference<DocumentData>;
   private updatedSnapshot = new Subject<QuerySnapshot<DocumentData>>();
@@ -41,6 +42,22 @@ storageRef: any;
     const snapshot = await getDocs(this.ApplicantsDoc);
     return snapshot;  
   }
+  async getUsers(email:string,password:string){
+    console.log("getting userd")
+    var result:any = ""
+    var usersRef = doc(this.db, "Applicants",email)
+     var userSnapp = await getDoc(usersRef).then(function(res){
+      if(res.exists()){
+      result = res.data()
+    }
+    else result = false
+
+    })
+     return result
+
+    
+    }
+  
   async addPic(e:any){
     this.storageRef = ref(this.myStorage, "firstUpload")
     uploadBytes(this.storageRef, e).then((snapshot) => {
@@ -49,8 +66,9 @@ storageRef: any;
 
   }
   async addDlFrontScan(e:any,id:string){
+    this.ms = getStorage()
    var  nameOfFile = id+"dlFrontScan"
-    this.storageRef = ref(this.myStorage, nameOfFile)
+    this.storageRef = ref(this.ms, nameOfFile)
     const task  = uploadBytes(this.storageRef, e).then((snapshot) => {
   console.log('Uploaded a blob or file!');
 

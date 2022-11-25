@@ -52,15 +52,11 @@ export class SignupComponent {
   saveDlFrontScan(e:any){
     console.log(e.target.files)
     this.dlFrontScan = e.target.files[0]
-        this.xmrapi.addDlFrontScan(e.target.files[0],this.email)
-        e = null
-        console.log(e)
-
+        
   }
   saveDlBackScan(e:any){
-    console.log(e.target.files)
+    
     this.dlBackScan = e.target.files[0]
-      this.xmrapi.addDlBackScan(e.target.files[0],this.email)
   }
   saveSSNFrontScan(e:any){
     this.ssnFrontScan = e.target.files[0]

@@ -45,12 +45,7 @@
           </mat-form-field>
         </div>
       
-          <mat-form-field class="full-width">
-            <input matInput placeholder="USERNAME" formControlName="lastName" [(ngModel)] = "userName">
-            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
-              Last name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
+          
         </div>
       
       <div class="col">
@@ -148,9 +143,9 @@
               Last name is <strong>required</strong>
             </mat-error>
           </mat-form-field>
-          <input hidden  (change)="saveDlFrontScan($event)" #fileInput type="file" id="file" >
+          <input (change)="saveDlFrontScan($event)" #fileInput type="file" id="file" >
 
-          <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+          <!--<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
         </div>
         <div class="col">
           <mat-form-field class="full-width">
@@ -159,9 +154,9 @@
               Last name is <strong>required</strong>
             </mat-error>
           </mat-form-field>
-          <input hidden (change)="saveDlBackScan($event)" #fileInput type="file" id="filee">
+          <input (change)="saveDlBackScan($event)" #fileInput type="file" id="filee">
 
-          <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+          <!--<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
         </div>
         <div class="col">
           <mat-form-field class="full-width">
@@ -170,8 +165,8 @@
               Last name is <strong>required</strong>
             </mat-error>
           </mat-form-field>
-          <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="saveSSNFrontScan($event)" #fileInput type="file" id="fileee">
+          <!--<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
+<input  (change)="saveSSNFrontScan($event)" #fileInput type="file" id="fileee">
         </div>
         <div class="col">
           <mat-form-field class="full-width">
@@ -180,8 +175,8 @@
               Last name is <strong>required</strong>
             </mat-error>
           </mat-form-field>
-          <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="saveProofOfAddress($event)" #fileInput type="file" id="fileeee">
+          <!--<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
+<input  (change)="saveProofOfAddress($event)" #fileInput type="file" id="fileeee">
         </div>
 
         

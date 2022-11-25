@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="USERNAME" formControlName="firstName">
+            <input matInput placeholder="USERNAME" formControlName="firstName" [(ngModel)]="email">
             <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
               First name is <strong>required</strong>
             </mat-error>
@@ -16,7 +16,7 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="PASSWORD" formControlName="lastName">
+            <input matInput placeholder="PASSWORD" formControlName="lastName" [(ngModel)]="password">
             <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
