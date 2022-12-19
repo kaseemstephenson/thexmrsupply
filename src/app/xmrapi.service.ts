@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { Firestore, setDoc, getFirestore, collection, getDoc, addDoc, getDocs, deleteDoc, doc, updateDoc, DocumentData, CollectionReference, onSnapshot, QuerySnapshot } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { HttpClient  } from '@angular/common/http';  
 
 import { Subject } from 'rxjs';
 import { environment } from '../environments/environment';
@@ -23,10 +24,11 @@ ms:any;
   private updatedSnapshot = new Subject<QuerySnapshot<DocumentData>>();
   obsr_UpdatedSnapshot = this.updatedSnapshot.asObservable();
 
-  constructor() {
+  constructor(private http:HttpClient) {
     initializeApp(environment.firebase);
     this.db = getFirestore();
     this.ApplicantsDoc = collection(this.db, 'Applicants');
+
 
     // Get Realtime Data
     onSnapshot(this.ApplicantsDoc, (snapshot) => {
@@ -41,6 +43,11 @@ ms:any;
   async getStudents() {
     const snapshot = await getDocs(this.ApplicantsDoc);
     return snapshot;  
+  }
+  async getUserIp(){
+
+        return  this.http.get("http://api.ipify.org/?format=json") 
+
   }
   async getUsers(email:string,password:string){
     console.log("getting userd")
@@ -144,6 +151,12 @@ async addApplicant(firstName: string, lastName: string, email:string, confirmEma
   async updateStudent(docId: string, name: string, age: string) {
     const docRef = doc(this.db, 'students', docId);
     await updateDoc(docRef, { name, age })
+    return;
+  }
+  async logUserIpForLogin(email: string, ip: any) {
+    ip= ip.ip
+    const docRef = doc(this.db, 'Applicants', email);
+    await updateDoc(docRef, { ip })
     return;
   }
 }

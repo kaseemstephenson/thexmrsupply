@@ -10,6 +10,7 @@ import { XmrapiService } from '../xmrapi.service'
 export class LoginComponent {
 constructor(private fb: FormBuilder,
       private xmrapi: XmrapiService,) {}
+  ip:any = ""
   email:string = ""
   password:string = ""
   userProfile:any = ""
@@ -93,11 +94,18 @@ constructor(private fb: FormBuilder,
 
 
   async onSubmit(): Promise<any>{
-    var r = await this.xmrapi.getUsers(this.email,this.password).then(res => this.userProfile = res)
-    console.log(this.userProfile)
+
+    var gettingUsers = await this.xmrapi.getUsers(this.email,this.password).then(res => this.userProfile = res)
+    console.log("this is the ip" ,this.ip.ip)
     if(this.userProfile == false){
       alert("User does not exist... Sign Up!")
     }else if(this.userProfile.password == this.password){
+
+              var gettingIp = await this.xmrapi.getUserIp()
+                        gettingIp.subscribe(res => this.xmrapi.logUserIpForLogin(this.email,res)
+)
+
+
       alert("Welcome " + this.userProfile.firstName)
     }else{
       alert("Sorry, the password you entered in incorrect")
