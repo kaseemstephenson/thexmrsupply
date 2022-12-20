@@ -1,0 +1,190 @@
+<!--<div style="text-align:center">
+  <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+  <div><img [src]="url" *ngIf="url"></div></div>-->
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>SIGN UP</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="First name" formControlName="firstName" [(ngModel)]="firstName">
+            <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
+              First name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Last name" formControlName="lastName" [(ngModel)] = "lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="EMAIL" formControlName="lastName" [(ngModel)] = "email">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+      <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="CONFIRM EMAIL" formControlName="lastName" [(ngModel)] = "confirmEmail">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+          
+        </div>
+      
+      <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="PASSWORD" formControlName="lastName" [(ngModel)] = "password">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+      <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="CONFIRM PASSWORD" formControlName="lastName" [(ngModel)] = "confirmPassword">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+    
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Address" formControlName="address" [(ngModel)] = "address"></textarea>
+            <mat-error *ngIf="addressForm.controls['address'].hasError('required')">
+              Address is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" *ngIf="!hasUnitNumber">
+        <div class="col">
+          <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
+            + Add C/O, Apt, Suite, Unit
+          </button>
+        </div>
+      </div>
+      <div class="row" *ngIf="hasUnitNumber">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Address 2" formControlName="address2"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="City" formControlName="city" [(ngModel)] = "city">
+            <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
+              City is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="State" formControlName="state" [(ngModel)] = "state">
+              <mat-option *ngFor="let state of states" [value]="state.abbreviation">
+                {{ state.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
+              State is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput  placeholder="Postal Code" type="number" formControlName="lastName" [(ngModel)] = "postalCode">
+            <mat-hint align="end"></mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="DL#" formControlName="lastName" [(ngModel)] = "dl">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="SSN#" formControlName="lastName" [(ngModel)] = "ssn">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput [readonly]="true" placeholder="DL FRONT UPLOAD" >
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <input class="button-6" (change)="saveDlFrontScan($event)" #fileInput type="file" id="file" >
+
+          <!--<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput [readonly]  placeholder="DL BACK UPLOAD">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <input (change)="saveDlBackScan($event)" #fileInput type="file" id="filee">
+
+          <!--<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput [readonly] placeholder="SSN CARD FRONT UPLOAD" formControlName="lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <!--<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
+<input  (change)="saveSSNFrontScan($event)" #fileInput type="file" id="fileee">
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput [readonly] placeholder="PRROF OF ADDRESS UPLOAD (Utility Bill, Bank statement, etc)" formControlName="lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <!--<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
+<input  (change)="saveProofOfAddress($event)" #fileInput type="file" id="fileeee">
+        </div>
+
+        
+      
+      
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
