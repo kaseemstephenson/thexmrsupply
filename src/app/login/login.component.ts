@@ -139,7 +139,7 @@ loggedInCheck:any = ""
 
       //alert("Welcome " + this.userProfile.firstName)
     }else{
-      alert("Sorry, the password you entered in incorrect")
+      alert("Sorry, the password you entered in jbjbincorrect")
     }
 
 
