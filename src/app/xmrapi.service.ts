@@ -52,7 +52,7 @@ ms:any;
         return  this.http.get("http://api.ipify.org/?format=json") 
 
   }
-  async getUsers(email:string,password:string){
+  async getUsers(email:any){
     console.log("getting userd")
     var result:any = ""
     var usersRef = doc(this.db, "Applicants",email)
@@ -66,6 +66,21 @@ ms:any;
      return result
 
     
+    }
+    async getIpDataToLoadUserProfile(ip:any){
+      var result:any = ""
+      var ipRef = doc(this.db,"ips",ip)
+      var ipSnap = await getDoc(ipRef).then(function(res){
+        if(res.exists()){
+
+          result = res.data()
+        console.log("In tgetIpDataToLoadUserProfile ", res.data())
+        }else{
+          result = false
+        }
+        
+      })
+      return result
     }
   
   async addPic(e:any){
@@ -181,4 +196,10 @@ async addApplicant(firstName: string, lastName: string, email:string, confirmEma
      return result
 
   }
+
+  async logUserOut(ip:any){
+    var docRef = doc(this.db, "ips",ip)
+    await deleteDoc(docRef)
+  }
+
 }

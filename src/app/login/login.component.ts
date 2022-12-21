@@ -127,7 +127,7 @@ loggedInCheck:any = ""
 
   async onSubmit(): Promise<any>{
 
-    var gettingUsers = await this.xmrapi.getUsers(this.email,this.password).then(res => this.userProfile = res)
+    var gettingUsers = await this.xmrapi.getUsers(this.email).then(res => this.userProfile = res)
     if(this.userProfile == false){
       alert("User does not exist... Sign Up!")
     }else if(this.userProfile.password == this.password){
