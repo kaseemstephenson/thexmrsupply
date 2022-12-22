@@ -24,6 +24,7 @@ import { MatListModule } from '@angular/material/list';
 import { SignupComponent } from './signup/signup.component';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table'  
 
 
 
@@ -54,6 +55,7 @@ import { FormsModule } from '@angular/forms';
     MatListModule,
     FormsModule,
     HttpClientModule,
+    MatTableModule,
     
     
 

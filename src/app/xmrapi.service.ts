@@ -22,6 +22,7 @@ ms:any;
 
   ApplicantsDoc: CollectionReference<DocumentData>;
   IpsDoc: CollectionReference<DocumentData>;
+  OrdersDoc: CollectionReference<DocumentData>;
   private updatedSnapshot = new Subject<QuerySnapshot<DocumentData>>();
   obsr_UpdatedSnapshot = this.updatedSnapshot.asObservable();
 
@@ -30,6 +31,7 @@ ms:any;
     this.db = getFirestore();
     this.ApplicantsDoc = collection(this.db, 'Applicants');
     this.IpsDoc = collection(this.db,'ips')
+    this.OrdersDoc =  collection(this.db,'Orders')
 
 
     // Get Realtime Data
@@ -157,6 +159,28 @@ async addApplicant(firstName: string, lastName: string, email:string, confirmEma
     ssn
   })
 
+}
+async initOrderDocumentForNewUser(email:any){
+  var docName = email
+  var orders:any = []
+  await setDoc(doc(this.OrdersDoc,docName),{orders})
+}
+
+async createOrder(email:any,amountUSD:any,paymentMethod:any,xmrAddress:any,orderss:Array<any>){
+  var newOrderArray = orderss
+  newOrderArray.push({amountUSD,paymentMethod,xmrAddress})
+  var orders = newOrderArray
+  var docRef = doc(this.db,'Orders',email)
+  await updateDoc(docRef,{orders})
+
+}
+async getUserOrders(email:any){
+  var ordersRef = doc(this.db,"Orders",email)
+  var result:any = ""
+  var  orsersSnap = await getDoc(ordersRef).then(function(res){
+    result = res.data()
+  })
+  return result
 }
 
 

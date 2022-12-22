@@ -50,20 +50,24 @@
 
           <div><mat-form-field appearance="fill">
   <mat-label>Amount $USD</mat-label>
-  <input matInput type="number">
+  <input matInput type="number" [(ngModel)]="amountUSD" [ngModelOptions]="{standalone: true}">>
 </mat-form-field>
 <mat-form-field appearance="fill">
   <mat-label>Payment Method</mat-label>
-  <mat-select>
-    <mat-option value="paypal">PayPal</mat-option>
-    <mat-option value="cashapp">Cash App(Square)</mat-option>
-        <mat-option value="ach">ACH TRANSFER</mat-option>
-          <mat-option value="zelle">ZELLE TRANSFER</mat-option>
-          <mat-option value="movo">MOVO PAY</mat-option>
-            <mat-option value="wu">WESTERN UNION (CASH PICKUP)</mat-option>
-            <mat-option value="xoom">XOOM</mat-option>
+  <mat-select [(ngModel)]="paymentMethod" [ngModelOptions]="{standalone: true}">>
+    <mat-option value="PayPal">PayPal</mat-option>
+    <mat-option value="CashApp(Square)">Cash App(Square)</mat-option>
+        <mat-option value="ACH Transfer">ACH TRANSFER</mat-option>
+          <mat-option value="ZELLE">ZELLE TRANSFER</mat-option>
+          <mat-option value="MOVO PAY">MOVO PAY</mat-option>
+            <mat-option value="WESTERN UNION (CASH PICKUP)">WESTERN UNION (CASH PICKUP)</mat-option>
+            <mat-option value="Xoom">XOOM</mat-option>
   </mat-select>
-</mat-form-field>       
+</mat-form-field>    
+<mat-form-field appearance="fill">
+  <mat-label>XMR ADDRESS</mat-label>
+  <input matInput type="text" [(ngModel)]="xmrAddress" [ngModelOptions]="{standalone: true}">>
+</mat-form-field>   
   
 <br>
 <button mat-fab color="primary" type="submit">
@@ -77,7 +81,7 @@
     </mat-grid-tile>
 
 
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-grid-tile [colspan]="1" [rowspan]="1" >
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
@@ -92,8 +96,20 @@
             </mat-menu>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Hdfdere</div>
+        <mat-card-content class="dashboard-card-content" >
+<mat-card *ngFor = "let orders of userOrders" class="order-cards">
+  <mat-card-header>
+    <mat-card-title>Order Title</mat-card-title>
+    <mat-card-subtitle>Amount to send:$ {{orders.amountUSD}}</mat-card-subtitle>
+        <mat-card-subtitle>Payment Method: {{orders.paymentMethod}}</mat-card-subtitle>
+    <mat-card-subtitle>Recieving XMR Address {{orders.xmrAddress}}</mat-card-subtitle>
+
+  </mat-card-header>
+  <mat-card-actions>
+    <button mat-button>Mark As Paid</button>
+    <button mat-button>Cancel</button>
+  </mat-card-actions>
+</mat-card>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

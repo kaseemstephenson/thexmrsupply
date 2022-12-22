@@ -8,6 +8,9 @@
   left: 15px;
   right: 15px;
   bottom: 15px;
+  overflow: auto;
+  align-content: center;
+
 }
 
 .more-button {
@@ -18,4 +21,14 @@
 
 .dashboard-card-content {
   text-align: center;
+  align-self: center;
+}
+
+
+.order-cards{
+  top: 20px;
+  
+  text-align: center;
+  filter:drop-shadow(30px 10px 4px #fff);
+
 }

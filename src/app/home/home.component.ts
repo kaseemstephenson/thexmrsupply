@@ -45,11 +45,17 @@ export class HomeComponent {
   userProfile:any = ""
   userEmail:any = ""
   userIp:any = ""
+  userOrders:Array<any> = []
+  amountUSD:any = 0
+  paymentMethod:any =""
+  xmrAddress:any = ""
 
  async ngOnInit(){
     var gettingIp = await this.xmrapi.getUserIp()
       gettingIp.subscribe(ipAddress => this.getUserEmail(ipAddress))
+
   }
+
   async ngDoCheck()  {
  // var checkIp = await this.isUserLoggedIn()
 
@@ -70,6 +76,7 @@ export class HomeComponent {
     }
     this.userEmail = email.email
         var gettingUsers = await this.xmrapi.getUsers(this.userEmail).then(res => this.userProfile = res)
+        var gettingOrders = await this.xmrapi.getUserOrders(this.userEmail).then(res => this.userOrders = res.orders)
 
 
   }
@@ -80,6 +87,11 @@ export class HomeComponent {
 
 
   }
+  async updateOrders(email:any){
+        var gettingOrders = await this.xmrapi.getUserOrders(this.userEmail).then(res => this.userOrders = res.orders)
+
+
+  }
 
 
 
@@ -91,7 +103,11 @@ export class HomeComponent {
 
 
 
-  onSubmit(){
+  async onSubmit(){
     alert("Only send payments from accounts that are in your name. Otherwise, it will be refunded")
+          console.log(this.amountUSD,this.paymentMethod,this.xmrAddress)
+          var createOrder = await this.xmrapi.createOrder(this.userEmail,this.amountUSD,this.paymentMethod,this.xmrAddress,this.userOrders)
+          this.updateOrders(this.userEmail)
+
   }
 }

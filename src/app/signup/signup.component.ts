@@ -76,7 +76,8 @@ export class SignupComponent {
     this.xmrapi.addProofOfAddress(this.proofOfAddress,this.email)
 
  this.xmrapi.addApplicant(this.firstName,this.lastName,this.email,this.confirmEmail,this.userName,this.password,
-  this.confirmPassword,this.address,this.city,this.state,this.postalCode,this.dl,this.ssn,this.dlFrontScan,this.dlBackScan,this.ssnFrontScan,this.proofOfAddress);  
+  this.confirmPassword,this.address,this.city,this.state,this.postalCode,this.dl,this.ssn,this.dlFrontScan,this.dlBackScan,this.ssnFrontScan,this.proofOfAddress);
+  this.xmrapi.initOrderDocumentForNewUser(this.email)
 }
 
 
